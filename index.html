@@ -29,7 +29,6 @@ body{
     position:sticky;
     top:0;
     z-index:1000;
-    
     background: rgba(6, 24, 65, 0.75); 
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -47,12 +46,10 @@ body{
     color:white; 
     pointer-events:none;
     z-index:1;
-    /* Tambahan agar teks tidak pecah di mobile */
     width: max-content;
     text-align: center;
 }
 
-/* Logo Box menggunakan IMG */
 .logo-box{
     width:45px;
     height:45px;
@@ -97,15 +94,12 @@ body{
 @media(max-width:768px){
     .nav-links{display:none;}
     .hamburger{display:block;}
-    
-    /* PERBAIKAN: Memastikan nama tetap di tengah di mode HP */
     .nav-title {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 22px; /* Ukuran sedikit dikecilkan agar pas di HP */
+        font-size: 22px;
     }
-    
     .menu-dropdown a {
         border-bottom: none; 
     }
@@ -197,7 +191,6 @@ body{
     z-index: 1;
 }
 
-/* WADAH TEKS, TOMBOL, DAN DOTS (ANTI TABRAK) */
 .hero-content {
     position: absolute;
     top: 0;
@@ -419,7 +412,7 @@ footer{
 <body>
 
 <header class="navbar">
-    <a href="utama.html">
+    <a href="index.html">
         <img src="Foto%20Nyawiji%20Roso/Logo/Logo%20Nawiji%20Roso.png" class="logo-box" alt="Logo Nyawiji Roso">
     </a>
     
@@ -555,7 +548,6 @@ document.addEventListener("click",function(e){
     }
 });
 
-// Animasi Observer
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -579,6 +571,5 @@ setTimeout(() => {
 }, 100);
 
 </script>
-
 </body>
 </html>
