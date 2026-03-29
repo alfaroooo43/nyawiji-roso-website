@@ -175,7 +175,7 @@ body{
     background-position: center;
 }
 
-.bg-1 { background-color: #53402a; }
+.bg-1 { background-image: url('Foto%20Nyawiji%20Roso/Galeri/foto%201.png'); background-color: #53402a; }
 .bg-2 { background-color: #2b3a5f; }
 .bg-3 { background-color: #4a5d23; }
 .bg-4 { background-color: #c47b2c; }
@@ -292,7 +292,15 @@ body{
 
 .about-text{flex:1;text-align:left;}
 .about-img{flex:1;display:flex;justify-content:center;}
-.dummy-about{width:280px; aspect-ratio:1/1; background:#c47b2c; border-radius:20px;}
+
+.about-real-img {
+    width: 100%; 
+    max-width: 320px; 
+    aspect-ratio: 1/1; 
+    object-fit: cover; 
+    border-radius: 20px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
 
 .btn{
     display:inline-block;
@@ -374,7 +382,106 @@ body{
 }
 
 /* =========================================
-   FOOTER
+   TAMBAHAN: SECTION SEKILAS TIM
+   ========================================= */
+.team-section {
+    padding: 40px 20px 80px 20px;
+    background: linear-gradient(to bottom, #1e2a47, #6f4819);
+    text-align: center;
+}
+
+.team-container {
+    max-width: 1000px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 50px 20px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.team-container h2 {
+    margin-top: 0;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.team-container p {
+    color: rgba(255,255,255,0.8);
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    line-height: 1.6;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.team-member-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #c47b2c;
+    border: 3px solid rgba(255,255,255,0.2);
+    object-fit: cover;
+    object-position: top center; 
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    transition: 0.3s ease;
+}
+
+.team-member-circle:hover {
+    transform: translateY(-5px) scale(1.05);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* =========================================
+   TAMBAHAN: SECTION COMING SOON
+   ========================================= */
+.coming-soon-section {
+    padding: 60px 20px 100px 20px;
+    background: linear-gradient(to bottom, #6f4819, #1e2a47); 
+    text-align: center;
+}
+
+.coming-soon-container {
+    max-width: 800px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 60px 20px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.coming-soon-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+    margin: 0;
+    text-shadow: 0 0 25px rgba(255,255,255,0.4);
+}
+
+.coming-soon-desc {
+    color: rgba(255,255,255,0.8);
+    margin-top: 20px;
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================
+   FOOTER & RESPONSIVE MQQ
    ========================================= */
 footer{
     background:#1e2a47;
@@ -390,6 +497,9 @@ footer{
     .about-img { order:-1; margin-bottom:20px; }
     .hero-content { padding-left: 5%; padding-right: 5%; text-align: left; }
     .hero-title { font-size: 3rem; }
+    .team-member-circle { width: 85px; height: 85px; }
+    .coming-soon-title { font-size: 2.5rem; letter-spacing: 2px; }
+    .coming-soon-container { padding: 40px 20px; }
     footer { flex-direction:column; text-align:center; gap: 15px;}
 }
 
@@ -477,7 +587,7 @@ footer{
             <a href="about.html" class="btn">Baca Selengkapnya</a>
         </div>
         <div class="about-img">
-            <div class="dummy-about"></div>
+            <img src="Foto%20Nyawiji%20Roso/Galeri/foto%201.png" alt="Tentang Nyawiji Roso" class="about-real-img">
         </div>
     </div>
 </section>
@@ -500,6 +610,30 @@ footer{
             </div>
         </div>
         <a href="menu.html" class="btn" style="margin-top: 20px;">Lihat Semua Menu</a>
+    </div>
+</section>
+
+<section class="team-section" id="team">
+    <div class="team-container hidden-scroll">
+        <h2>Sekilas Tim Nyawiji Roso</h2>
+        <p>Di balik hangatnya suasana dan kelezatan hidangan Nyawiji Roso, terdapat tangan-tangan penuh dedikasi yang selalu menyambut Anda layaknya keluarga sendiri.</p>
+        
+        <div class="team-grid">
+            <img src="Foto%20Nyawiji%20Roso/about/team/owner.png" alt="Owner" class="team-member-circle">
+            <img src="Foto%20Nyawiji%20Roso/about/team/team%201.png" alt="Team 1" class="team-member-circle">
+            <img src="Foto%20Nyawiji%20Roso/about/team/team%202.png" alt="Team 2" class="team-member-circle">
+            <img src="Foto%20Nyawiji%20Roso/about/team/team%203.png" alt="Team 3" class="team-member-circle">
+            <img src="Foto%20Nyawiji%20Roso/about/team/team%204.png" alt="Team 4" class="team-member-circle">
+        </div>
+        
+        <a href="about.html" class="btn">Kenali Kami Lebih Dekat</a>
+    </div>
+</section>
+
+<section class="coming-soon-section" id="comingsoon">
+    <div class="coming-soon-container hidden-scroll">
+        <h1 class="coming-soon-title">COMING SOON</h1>
+        <p class="coming-soon-desc">Fitur dan pembaruan menarik lainnya dari website Nyawiji Roso sedang dalam tahap penyempurnaan.</p>
     </div>
 </section>
 
