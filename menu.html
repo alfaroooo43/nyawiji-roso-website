@@ -35,10 +35,14 @@ main {
     background: linear-gradient(to bottom, #1e2a47, #6f4819); 
     color: white; 
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Untuk menengahkan coming soon */
 }
 
 .menu-category {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto 80px auto;
     position: relative;
     z-index: 2;
@@ -201,6 +205,46 @@ main {
 .modal-info ul li strong { color: #e5a953; }
 
 /* =========================================
+   TAMBAHAN: COMING SOON YANG LEBIH MENARIK
+   ========================================= */
+.coming-soon-wrapper {
+    margin-top: 100px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    padding: 50px 30px;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.coming-soon-text {
+    font-size: 4.5rem;
+    font-family: 'JAWAPALSU', sans-serif;
+    color: #ffcc70; /* Warna glowing emas */
+    margin: 0 0 15px 0;
+    letter-spacing: 8px;
+    text-shadow: 0 0 25px rgba(255, 204, 112, 0.5);
+    animation: pulseText 3s infinite alternate;
+}
+
+.coming-soon-subtext {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+@keyframes pulseText {
+    0% { text-shadow: 0 0 15px rgba(255, 204, 112, 0.3); transform: scale(1); }
+    100% { text-shadow: 0 0 35px rgba(255, 204, 112, 0.7); transform: scale(1.03); }
+}
+
+/* =========================================
    ANIMASI SCROLL (MEMBAL POP-UP)
    ========================================= */
 .hidden-scroll { 
@@ -220,10 +264,12 @@ main {
     .hero-details h2 { font-size: 2.2rem; }
     .category-title { font-size: 2.8rem; }
     .modal-content { padding: 30px 20px; }
+    .coming-soon-wrapper { padding: 40px 20px; }
+    .coming-soon-text { font-size: 2.8rem; letter-spacing: 4px; }
 }
 
 /* FOOTER */
-footer{ background:#1e2a47; color:white; padding:40px 20px; display:flex; justify-content:space-between; align-items:center; }
+footer{ background:#1e2a47; color:white; padding:40px 20px; display:flex; justify-content:space-between; align-items:center; width: 100%; box-sizing: border-box;}
 @media(max-width:768px){ footer { flex-direction:column; text-align:center; gap: 15px;} }
 </style>
 </head>
@@ -256,7 +302,7 @@ footer{ background:#1e2a47; color:white; padding:40px 20px; display:flex; justif
                 <img src="Foto%20Nyawiji%20Roso/Menu/menu%201.png" alt="Menu 1 Minuman Utama">
             </div>
             <div class="hero-details">
-                <h2>Es Kopi Susu Gula Aren</h2>
+                <h2>Bubuk Kopi Susu Gula Aren</h2>
                 <div class="price-badge">Rp 10.000</div>
                 <p class="hero-desc">
                     Perpaduan sempurna antara espresso khas Nyawiji Roso dengan kelembutan susu segar dan manisnya gula aren murni asli Nusantara. Memberikan kesegaran di setiap tegukannya.
@@ -269,7 +315,7 @@ footer{ background:#1e2a47; color:white; padding:40px 20px; display:flex; justif
             <div class="menu-card hidden-scroll">
                 <img src="Foto%20Nyawiji%20Roso/Menu/menu%202.png" alt="Menu 2 Minuman">
                 <div class="price">15k</div>
-                <h3>Coffe Latte</h3>
+                <h3>Bubuk Coffe Latte</h3>
                 <p>Coffe premium berpadu dengan susu krim segar. Lembut, creamy, dan memberikan efek relaksasi yang menenangkan hari Anda.</p>
                 <button class="btn-secondary" onclick="openModal('Matcha Latte', 'Foto%20Nyawiji%20Roso/Menu/menu%202.png', 'Rp 15.000', 'Coffe premium berpadu dengan susu krim segar. Lembut, creamy, dan menenangkan.', 'Bubuk Kopi Pilihan Premium Uji, Susu Segar, Simple Syrup', '15 Mei 2026', '17 Mei 2026')">Lihat Selengkapnya</button>
             </div>
@@ -277,7 +323,7 @@ footer{ background:#1e2a47; color:white; padding:40px 20px; display:flex; justif
             <div class="menu-card hidden-scroll">
                 <img src="Foto%20Nyawiji%20Roso/Menu/menu%202.png" alt="Menu Kopi Hitam">
                 <div class="price">18K</div>
-                <h3>Kopi Hitam Tubruk</h3>
+                <h3>Bubuk Kopi Hitam Tubruk</h3>
                 <p>Biji kopi pilihan yang diseduh secara tradisional. Memberikan cita rasa pekat dan aroma yang kuat untuk Anda pecinta kopi sejati.</p>
                 <button class="btn-secondary" onclick="openModal('Kopi Hitam Tubruk', 'Foto%20Nyawiji%20Roso/Menu/menu%202.png', 'Rp 18.000', 'Biji kopi pilihan yang diseduh secara tradisional. Memberikan cita rasa pekat dan aroma yang kuat.', '100% Biji Kopi Robusta & Arabica, Air Panas', 'Diseduh Langsung', 'Segera Habiskan')">Lihat Selengkapnya</button>
             </div>
@@ -292,27 +338,35 @@ footer{ background:#1e2a47; color:white; padding:40px 20px; display:flex; justif
                 <img src="Foto%20Nyawiji%20Roso/Menu/menu%203.png" alt="Menu 3 Makanan">
                 <div class="price">12K</div>
                 <h3>Cemilan Pisang Sale</h3>
-                <p>Cemilan pisang sale dengan manis legit alami dari pisang pilihan. Dilengkapi balutan tepung yang renyah, tekstur empuk di dalam, dan aroma karamel yang menggugah selera.</p>
-                <button class="btn-secondary" onclick="openModal('Pisang Sale Renyah', 'Foto%20Nyawiji%20Roso/Menu/pisang%20sale.png', 'Rp 12.000', 'Cemilan pisang sale dengan manis legit alami dari pisang pilihan. Dilengkapi balutan tepung yang renyah dan tekstur empuk di dalam.', 'Pisang Pilihan, Tepung Beras, Tepung Terigu, Gula Aren, Minyak Nabati', '29-12-2025', 'Simpan di Wadah Kedap Udara')">Lihat Selengkapnya</button>
+                <p>"Cemilan pisang sale dengan manis legit alami dari pisang pilihan. Dilengkapi balutan tepung yang renyah, tekstur empuk di dalam, dan aroma karamel yang menggugah selera."</p>
+                <button class="btn-secondary" onclick="openModal('Pisang Sale Renyah', 'Foto%20Nyawiji%20Roso/Menu/menu%203.png', 'Rp 12.000', 'Cemilan pisang sale dengan manis legit alami dari pisang pilihan. Dilengkapi balutan tepung yang renyah dan tekstur empuk di dalam.', 'Pisang Pilihan, Tepung Beras, Tepung Terigu, Gula Aren, Minyak Nabati', '29-12-2025', 'Simpan di Wadah Kedap Udara')">Lihat Selengkapnya</button>
             </div>
             
              <div class="menu-card hidden-scroll">
                 <img src="Foto%20Nyawiji%20Roso/Menu/menu%204.png" alt="Menu Makanan Tambahan">
-                <div class="price">40K</div>
-                <h3>Ayam Bakar Madu</h3>
-                <p>Ayam pilihan yang dibakar sempurna dengan olesan madu murni dan rempah manis gurih. Disajikan dengan sambal terasi khas.</p>
-                <button class="btn-secondary" onclick="openModal('Ayam Bakar Madu', 'Foto%20Nyawiji%20Roso/Menu/menu%203.png', 'Rp 40.000', 'Ayam pilihan yang dibakar sempurna dengan olesan madu murni dan rempah manis gurih. Pilihan tepat untuk makan siang.', 'Daging Ayam Pilihan, Madu Murni, Rempah-rempah, Kecap', 'Dimasak Langsung', 'Segera Konsumsi')">Lihat Selengkapnya</button>
+                <div class="price">10K</div>
+                <h3>Tahu Walik</h3>
+                <p>"Tahu walik super renyah di luar dengan tekstur kenyal di dalam. Tahu isi dagingnya daging banget dan gurih pol! Disajikan dengan saus cocolan pedas manis yang bikin makin mantap."</p>
+                <button class="btn-secondary" onclick="openModal('Tahu Walik', 'Foto%20Nyawiji%20Roso/Menu/menu%204.png', 'Rp 10.000', 'Tahu krispi yang dibalik dan digoreng sempurna dengan isian adonan gurih. Tahu isi daging nya naging banget! Pilihan tepat untuk teman santai.', 'Tahu Pong Pilihan, Adonan Daging Spesial, Rempah-rempah, Daun Bawang', 'Dimasak Langsung', 'Segera Konsumsi')">Lihat Selengkapnya</button>
             </div>
             
              <div class="menu-card hidden-scroll">
-                <img src="Foto%20Nyawiji%20Roso/Menu/menu%204.png" alt="Menu Makanan Tambahan">
-                <div class="price">30K</div>
-                <h3>Mie Goreng Jawa</h3>
-                <p>Mie kenyal yang dimasak dengan gaya Jawa klasik, sedikit manis dan gurih, dengan potongan sayur segar dan suwiran ayam.</p>
-                <button class="btn-secondary" onclick="openModal('Mie Goreng Jawa', 'Foto%20Nyawiji%20Roso/Menu/menu%203.png', 'Rp 30.000', 'Mie kenyal yang dimasak dengan gaya Jawa klasik, sedikit manis dan gurih, dengan potongan sayur segar.', 'Mie Kuning, Bumbu Kecap Jawa, Telur, Sawi, Ayam Suwir', 'Dimasak Langsung', 'Segera Konsumsi')">Lihat Selengkapnya</button>
+                <img src="Foto%20Nyawiji%20Roso/Menu/menu%205.png" alt="Menu Makanan Tambahan">
+                <div class="price">12K</div>
+                <h3>Mix platter</h3>
+                <p>"Sajian lengkap aneka cemilan favorit buat teman nongkrong. Berisi perpaduan tahu walik, kentang goreng, dan nuget ayam, disajikan hangat lengkap dengan cocolan saos sedap."</p>
+                <button class="btn-secondary" onclick="openModal('Mix Platter', 'Foto%20Nyawiji%20Roso/Menu/menu%205.png', 'Rp 12.000', 'Sajian cemilan lengkap berisi perpaduan renyah tahu walik, kentang goreng, dan nuget ayam. Disajikan hangat dengan saos cocolan pilihan.', 'Tahu Walik, Kentang Goreng, Nugget Ayam, Saos Sambal', 'Dimasak Langsung', 'Segera Konsumsi')">Lihat Selengkapnya</button>
             </div>
         </div>
     </section>
+
+    <div class="coming-soon-wrapper hidden-scroll">
+        <h1 class="coming-soon-text">COMING SOON</h1>
+        <p class="coming-soon-subtext">
+            Nantikan menu-menu baru dan spesial lainnya dari kami! Kami selalu berinovasi meracik rasa agar pengalaman kuliner Anda di <strong>Nyawiji Roso</strong> semakin tak terlupakan.
+            <br><br>🌟 <em>Stay tuned!</em> 🌟
+        </p>
+    </div>
 
 </main>
 
@@ -349,13 +403,13 @@ document.addEventListener("click",function(e){
     }
 });
 
-// Script Animasi Scroll (Sama persis seperti halaman lain)
+// Script Animasi Scroll
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
             entry.target.classList.add('show-scroll');
         } else {
-            entry.target.classList.remove('show-scroll'); // Menghapus class agar membal lagi saat scroll atas/bawah
+            entry.target.classList.remove('show-scroll');
         }
     });
 }, { threshold: 0.1 });

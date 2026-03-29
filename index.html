@@ -4,6 +4,8 @@
 <title>Nyawiji Roso</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 /* CSS RESET & DASAR */
 body{
@@ -98,7 +100,7 @@ body{
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 22px;
+        font-size: 22px; 
     }
     .menu-dropdown a {
         border-bottom: none; 
@@ -176,10 +178,10 @@ body{
 }
 
 .bg-1 { background-image: url('Foto%20Nyawiji%20Roso/Galeri/foto%201.png'); background-color: #53402a; }
-.bg-2 { background-color: #2b3a5f; }
-.bg-3 { background-color: #4a5d23; }
-.bg-4 { background-color: #c47b2c; }
-.bg-5 { background-color: #5f332b; }
+.bg-2 { background-image: url('Foto%20Nyawiji%20Roso/Galeri/foto%202.jpeg'); background-color: #2b3a5f; }
+.bg-3 { background-image: url('Foto%20Nyawiji%20Roso/Galeri/foto%203.jpeg'); background-color: #4a5d23; }
+.bg-4 { background-image: url('Foto%20Nyawiji%20Roso/Galeri/foto%204.jpeg'); background-color: #c47b2c; }
+.bg-5 { background-image: url('Foto%20Nyawiji%20Roso/Galeri/foto%205.jpeg'); background-color: #5f332b; }
 
 .overlay-dark {
     position: absolute;
@@ -340,7 +342,10 @@ body{
 .menu-section h2 { 
     margin-top: 0; 
     margin-bottom: 30px; 
-    font-size: 2rem;
+    font-family: 'JAWAPALSU', sans-serif;
+    font-size: 2.8rem;
+    color: #fff;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 }
 
 .slider{
@@ -359,21 +364,53 @@ body{
     padding: 20px 0; 
 }
 
+/* KARTU PRODUK DENGAN EFEK GLASSMORPHISM */
 .card{
     width:220px;
     height:280px;
-    background:#c47b2c;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius:18px;
     flex-shrink:0;
     cursor:pointer;
-    transition:0.3s ease;
+    transition:transform 0.3s ease, background 0.3s ease;
     position:relative;
     overflow:hidden;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
 }
 
-.card:hover { transform: scale(1.05); }
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3)); 
+}
 
-.overlay{position:absolute;bottom:-50px;width:100%;padding:10px;background:rgba(0,0,0,0.7);color:white;text-align:center;transition:0.3s;}
+.card:hover { 
+    transform: scale(1.05) translateY(-5px);
+    background: rgba(255, 255, 255, 0.1); 
+}
+.card:hover img { transform: scale(1.1); }
+
+.overlay{
+    position:absolute;
+    bottom:-60px;
+    width:100%;
+    padding:15px 10px;
+    background:rgba(6, 24, 65, 0.85); 
+    color:white;
+    text-align:center;
+    transition:0.3s;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    box-sizing: border-box;
+}
 .card:hover .overlay{bottom:0;}
 
 @keyframes scroll{
@@ -382,7 +419,7 @@ body{
 }
 
 /* =========================================
-   TAMBAHAN: SECTION SEKILAS TIM
+   SECTION SEKILAS TIM
    ========================================= */
 .team-section {
     padding: 40px 20px 80px 20px;
@@ -442,42 +479,50 @@ body{
 }
 
 /* =========================================
-   TAMBAHAN: SECTION COMING SOON
+   SECTION COMING SOON (UPDATE BARU)
    ========================================= */
 .coming-soon-section {
     padding: 60px 20px 100px 20px;
     background: linear-gradient(to bottom, #6f4819, #1e2a47); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coming-soon-wrapper {
     text-align: center;
-}
-
-.coming-soon-container {
-    max-width: 800px;
-    margin: auto;
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 60px 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 25px;
+    padding: 50px 30px;
+    width: 100%;
+    max-width: 900px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    color: white;
 }
 
-.coming-soon-title {
-    font-size: 3.5rem;
-    font-weight: 900;
-    letter-spacing: 5px;
-    margin: 0;
-    text-shadow: 0 0 25px rgba(255,255,255,0.4);
+.coming-soon-text {
+    font-size: 4.5rem;
+    font-family: 'JAWAPALSU', sans-serif;
+    color: #ffcc70; /* Warna glowing emas */
+    margin: 0 0 15px 0;
+    letter-spacing: 8px;
+    text-shadow: 0 0 25px rgba(255, 204, 112, 0.5);
+    animation: pulseText 3s infinite alternate;
 }
 
-.coming-soon-desc {
-    color: rgba(255,255,255,0.8);
-    margin-top: 20px;
-    font-size: 1.1rem;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+.coming-soon-subtext {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+@keyframes pulseText {
+    0% { text-shadow: 0 0 15px rgba(255, 204, 112, 0.3); transform: scale(1); }
+    100% { text-shadow: 0 0 35px rgba(255, 204, 112, 0.7); transform: scale(1.03); }
 }
 
 /* =========================================
@@ -498,8 +543,9 @@ footer{
     .hero-content { padding-left: 5%; padding-right: 5%; text-align: left; }
     .hero-title { font-size: 3rem; }
     .team-member-circle { width: 85px; height: 85px; }
-    .coming-soon-title { font-size: 2.5rem; letter-spacing: 2px; }
-    .coming-soon-container { padding: 40px 20px; }
+    .coming-soon-wrapper { padding: 40px 20px; }
+    .coming-soon-text { font-size: 2.8rem; letter-spacing: 4px; }
+    .coming-soon-subtext { font-size: 1rem; }
     footer { flex-direction:column; text-align:center; gap: 15px;}
 }
 
@@ -597,16 +643,46 @@ footer{
         <h2>Menu Nyawiji Roso</h2>
         <div class="slider">
             <div class="menu-wrapper">
-                <div class="card"><div class="overlay">Menu 1</div></div>
-                <div class="card"><div class="overlay">Menu 2</div></div>
-                <div class="card"><div class="overlay">Menu 3</div></div>
-                <div class="card"><div class="overlay">Menu 4</div></div>
-                <div class="card"><div class="overlay">Menu 5</div></div>
-                <div class="card"><div class="overlay">Menu 1</div></div>
-                <div class="card"><div class="overlay">Menu 2</div></div>
-                <div class="card"><div class="overlay">Menu 3</div></div>
-                <div class="card"><div class="overlay">Menu 4</div></div>
-                <div class="card"><div class="overlay">Menu 5</div></div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%201.png" alt="Kopi Susu Gula Aren">
+                    <div class="overlay">Kopi Susu Gula Aren</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%202.png" alt="Coffe Latte">
+                    <div class="overlay">Coffe Latte</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%203.png" alt="Pisang Sale">
+                    <div class="overlay">Pisang Sale</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%204.png" alt="Tahu Walik">
+                    <div class="overlay">Tahu Walik</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%205.png" alt="Mix Platter">
+                    <div class="overlay">Mix Platter</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%201.png" alt="Kopi Susu Gula Aren">
+                    <div class="overlay">Kopi Susu Gula Aren</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%202.png" alt="Coffe Latte">
+                    <div class="overlay">Coffe Latte</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%203.png" alt="Pisang Sale">
+                    <div class="overlay">Pisang Sale</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%204.png" alt="Tahu Walik">
+                    <div class="overlay">Tahu Walik</div>
+                </div>
+                <div class="card">
+                    <img src="Foto%20Nyawiji%20Roso/Menu/menu%205.png" alt="Mix Platter">
+                    <div class="overlay">Mix Platter</div>
+                </div>
             </div>
         </div>
         <a href="menu.html" class="btn" style="margin-top: 20px;">Lihat Semua Menu</a>
@@ -631,9 +707,12 @@ footer{
 </section>
 
 <section class="coming-soon-section" id="comingsoon">
-    <div class="coming-soon-container hidden-scroll">
-        <h1 class="coming-soon-title">COMING SOON</h1>
-        <p class="coming-soon-desc">Fitur dan pembaruan menarik lainnya dari website Nyawiji Roso sedang dalam tahap penyempurnaan.</p>
+    <div class="coming-soon-wrapper hidden-scroll">
+        <h1 class="coming-soon-text">COMING SOON</h1>
+        <p class="coming-soon-subtext">
+            Nantikan fitur-fitur baru dan pembaruan menarik lainnya! Kami sedang menyiapkan layanan digital terbaik agar pengalaman Anda bersama <strong>Nyawiji Roso</strong> semakin berkesan. 
+            <br><br>🌟 <em>Stay tuned!</em> 🌟
+        </p>
     </div>
 </section>
 
