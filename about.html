@@ -44,11 +44,69 @@ body {
 .reveal.active { opacity: 1; transform: translateY(0); }
 .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
 
+/* =========================================================
+   HOLOGRAM 3D INTERAKTIF
+   ========================================================= */
+.hologram-wrapper {
+    perspective: 1000px;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 40px auto; /* Jarak ke judul */
+    position: relative;
+    cursor: grab;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hologram-wrapper:active { cursor: grabbing; }
+
+.hologram-coin {
+    width: 100%; height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+}
+
+.coin-face {
+    position: absolute;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    display: flex; justify-content: center; align-items: center;
+    background: #ffffff; /* Background putih full biar logo menyatu jadi koin */
+    border: 4px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.coin-back { transform: rotateY(180deg); }
+
+.coin-face img {
+    width: 85%; /* Sedikit margin di dalam lingkaran */
+    height: 85%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.hologram-shadow {
+    width: 120px; height: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    margin-top: 210px; /* Posisi bayangan di bawah koin */
+    filter: blur(5px);
+    animation: shadowPulse 3s infinite alternate ease-in-out;
+}
+@keyframes shadowPulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(0.8); opacity: 0.2; }
+}
+
 /* HERO STORY & PILAR SECTION */
 .hero-container, .content-section, .team-section { padding: 60px 5% 60px 5%; max-width: 1200px; margin: 0 auto; }
-.hero-header, .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+.hero-header { display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 40px; text-align: center;}
+.section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
 .hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin: 0; color: #fff; max-width: 600px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-.hero-desc-box { max-width: 400px; text-align: left; }
+.hero-desc-box { max-width: 500px; text-align: center; margin-top: 20px;}
 .hero-desc { color: rgba(255,255,255,0.8); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0; }
 .hero-visuals { position: relative; width: 100%; }
 .hero-image-wrapper { width: 100%; border-radius: 30px; overflow: hidden; height: 450px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
@@ -94,7 +152,6 @@ body {
 .team-card-title { font-size: 1.2rem; font-weight: 800; color: #fff; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px; }
 .team-card-desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; }
 
-/* STATE 1: SEDANG DITUMPUK LURUS KE BAWAH */
 .team-deck.is-stacked { height: 480px; }
 .team-deck.is-stacked .team-card { position: absolute; left: calc(50% - 125px); }
 .team-deck.is-stacked .card-1 { top: 0; z-index: 5; filter: blur(0); opacity: 1; transform: translateY(0) scale(1); }
@@ -103,7 +160,6 @@ body {
 .team-deck.is-stacked .card-4 { top: 0; z-index: 2; filter: blur(6px); opacity: 0.7; transform: translateY(90px) scale(0.85); }
 .team-deck.is-stacked .card-5 { top: 0; z-index: 1; filter: blur(8px); opacity: 0.6; transform: translateY(120px) scale(0.8); }
 
-/* STATE 2: SEDANG DIKLIK / DILEBARKAN */
 .team-deck.is-expanded {
     display: grid; grid-template-columns: repeat(4, auto); justify-content: center; gap: 30px; height: auto;
 }
@@ -186,8 +242,10 @@ body {
 footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255,0.6); padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
 
 @media(max-width: 768px) {
+    .hologram-wrapper { width: 140px; height: 140px; }
+    .hologram-shadow { margin-top: 170px; }
     .hero-title { font-size: 2.5rem; }
-    .hero-header, .section-header { flex-direction: column; align-items: flex-start; }
+    .hero-header, .section-header { flex-direction: column; align-items: center; text-align: center;}
     .floating-info-bar { position: relative; bottom: 0; width: 100%; transform: none; left: 0; margin-top: 20px; padding: 25px 20px; flex-direction: column; align-items: center; box-sizing: border-box;}
     .hero-image-wrapper { height: 300px; }
     .team-title { font-size: 2.2rem; }
@@ -256,9 +314,22 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255
 <main>
     <section class="hero-container">
         <div class="hero-header reveal">
+            <div class="hologram-wrapper" id="hologramWrapper">
+                <div class="hologram-coin" id="hologramCoin">
+                    <div class="coin-face coin-front">
+                        <img src="Foto%20Nyawiji%20Roso/Logo/Logo%20Nawiji%20Roso.png" alt="Logo Depan">
+                    </div>
+                    <div class="coin-face coin-back">
+                        <img src="Foto%20Nyawiji%20Roso/Logo/Logo%20Nawiji%20Roso.png" alt="Logo Belakang">
+                    </div>
+                </div>
+                <div class="hologram-shadow"></div>
+            </div>
+
             <h1 class="hero-title">Menyatukan Rasa,<br>Merawat Asa.</h1>
             <div class="hero-desc-box"><p class="hero-desc">Nyawiji Roso lahir dari keinginan sederhana: menghadirkan kembali memori masakan rumahan otentik di tengah hangatnya kebersamaan.</p></div>
         </div>
+
         <div class="hero-visuals reveal delay-1">
             <div class="hero-image-wrapper">
                 <img src="Foto%20Nyawiji%20Roso/Galeri/foto%201.png" alt="Nyawiji Roso">
@@ -318,7 +389,7 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255
     </section>
 
     <section class="coming-soon-section reveal">
-        <div class="coming-soon-box">
+        <div class="coming-soon-box glass-effect">
             <h1 class="coming-soon-text">COMING SOON</h1>
             <p class="coming-soon-subtext">
                 Halaman cerita tentang Nyawiji Roso sedang kami rangkai dengan hati untuk memberikan pengalaman membaca yang lebih utuh dan mendalam.
@@ -365,12 +436,79 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* =========================================================
+   LOGIKA INTERAKTIF HOLOGRAM 3D LINGKARAN
+   ========================================================= */
+const hologramCoin = document.getElementById('hologramCoin');
+const hologramWrapper = document.getElementById('hologramWrapper');
+
+let isDragging = false;
+let startX, startY;
+let rotX = 0, rotY = 0;
+let autoSpin;
+
+// Auto spin 360 perlahan jika tidak disentuh
+function startAutoSpin() {
+    autoSpin = setInterval(() => {
+        if (!isDragging) {
+            rotY += 1; 
+            hologramCoin.style.transition = 'none';
+            hologramCoin.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        }
+    }, 30);
+}
+startAutoSpin();
+
+// Event Mouse / Desktop
+hologramWrapper.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX; startY = e.pageY;
+    clearInterval(autoSpin);
+});
+window.addEventListener('mouseup', () => {
+    if(isDragging) { isDragging = false; startAutoSpin(); }
+});
+window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const x = e.pageX; const y = e.pageY;
+    const deltaX = (x - startX) * 0.5;
+    const deltaY = (y - startY) * 0.5;
+    
+    rotY += deltaX;
+    rotX -= deltaY; 
+    
+    hologramCoin.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    startX = x; startY = y;
+});
+
+// Event Sentuh / Touch (HP/Mobile)
+hologramWrapper.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].pageX; startY = e.touches[0].pageY;
+    clearInterval(autoSpin);
+});
+window.addEventListener('touchend', () => {
+    if(isDragging) { isDragging = false; startAutoSpin(); }
+});
+window.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX; const y = e.touches[0].pageY;
+    const deltaX = (x - startX) * 0.5;
+    const deltaY = (y - startY) * 0.5;
+    
+    rotY += deltaX;
+    rotX -= deltaY;
+    
+    hologramCoin.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    startX = x; startY = y;
+});
+
+/* =========================================================
    IMPRESSIONS DATA & RICH MODAL LOGIC
    ========================================================= */
 const impressionsData = {
     card1: {
         img: "Foto%20Nyawiji%20Roso/about/team/owner.png",
-        name: "OWNER OF NYAWJI ROSO", // Ganti dengan nama asli Owner
+        name: "OWNER OF NYAWJI ROSO",
         role: "Owner Nyawiji Roso",
         text: "Founder yang ramah, selalu menyambut hangat dengan senyumannya yang tulus, memastikan setiap pengunjung merasa seperti Pulang Ke Rumah Sendiri."
     },
