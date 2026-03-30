@@ -339,6 +339,83 @@ main {
 .delay-2 { transition-delay: 0.3s; }
 .delay-3 { transition-delay: 0.5s; }
 
+/* =========================================
+   POPUP IKLAN (PROMO/INFOGRAFIS) 
+   ========================================= */
+.promo-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.promo-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.promo-content {
+    position: relative;
+    max-width: 500px; 
+    width: 90%;
+    transform: scale(0.5) translateY(100px); 
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.promo-overlay.show .promo-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.promo-content img {
+    width: 100%;
+    max-height: 85vh; 
+    object-fit: contain; 
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    display: block;
+    background: #ffffff; 
+}
+
+.promo-close-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 45px;
+    height: 45px;
+    background: #c47b2c;
+    color: white;
+    border: 3px solid #1e2a47; 
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+    z-index: 10;
+    line-height: 0;
+    padding-bottom: 4px; 
+}
+
+.promo-close-btn:hover {
+    background: #e5a953;
+    transform: scale(1.15) rotate(90deg); 
+}
+
 /* RESPONSIVE MOBILE */
 @media(max-width: 900px) {
     .contact-container { grid-template-columns: 1fr; }
@@ -348,6 +425,7 @@ main {
     .coming-soon-wrapper { padding: 40px 20px; }
     .coming-soon-text { font-size: 2.8rem; letter-spacing: 4px; }
     .coming-soon-subtext { font-size: 1rem; }
+    .promo-close-btn { width: 38px; height: 38px; font-size: 22px; top: -12px; right: -12px; }
 }
 
 /* FOOTER */
@@ -357,6 +435,13 @@ footer { background: #1e2a47; color: white; padding: 30px 20px; display: flex; j
 </head>
 
 <body>
+
+<div class="promo-overlay" id="promoPopup">
+    <div class="promo-content">
+        <button class="promo-close-btn" onclick="closePromo()">&times;</button>
+        <img src="Foto%20Nyawiji%20Roso/Galeri/infografis.png" alt="Promo Nyawiji Roso">
+    </div>
+</div>
 
 <div class="bg-animation">
     <div class="glow-orb-1"></div>
@@ -397,12 +482,12 @@ footer { background: #1e2a47; color: white; padding: 30px 20px; display: flex; j
             
             <div class="map-container">
                 <iframe 
-                    src="https://maps.google.com/maps?q=Pujer,+Kabupaten+Bondowoso,+Jawa+Timur&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.6214068593463!2d113.8821943!3d-7.9345555999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6c30058b85fbd%3A0xeae0cc0c11f7c00e!2sNYAWIJI%20ROSO!5e0!3m2!1sen!2sid!4v1711812345678!5m2!1sen!2sid" 
                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
             
-            <a href="https://www.google.com/maps/place/Pujer,+Kabupaten+Bondowoso,+Jawa+Timur" target="_blank" class="btn-social btn-map">🗺️ Buka di Google Maps</a>
+            <a href="https://maps.app.goo.gl/wSrxzYd2U3gqWqDYA" target="_blank" class="btn-social btn-map">🗺️ Buka di Google Maps</a>
 
             <h3 style="margin-top: 40px;">Kontak & Sosial Media</h3>
             <div class="contact-item">📞 +62 812-3236-1176</div>
@@ -445,6 +530,28 @@ footer { background: #1e2a47; color: white; padding: 30px 20px; display: flex; j
 </footer>
 
 <script>
+// =========================================
+// SCRIPT POPUP IKLAN MUNCUL OTOMATIS
+// =========================================
+document.addEventListener("DOMContentLoaded", function() {
+    // Popup muncul 1 detik setelah halaman dimuat/direfresh
+    setTimeout(function() {
+        document.getElementById('promoPopup').classList.add('show');
+    }, 1000);
+});
+
+function closePromo() {
+    document.getElementById('promoPopup').classList.remove('show');
+}
+
+// Tutup Popup kalau diklik area gelap di luar gambar
+document.getElementById('promoPopup').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closePromo();
+    }
+});
+// =========================================
+
 // Fungsi Toggle Menu Mobile
 function toggleMenu(){ 
     document.getElementById("menuDropdown").classList.toggle("show"); 
