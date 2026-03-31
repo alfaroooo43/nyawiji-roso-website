@@ -51,7 +51,7 @@ body {
     perspective: 1000px;
     width: 180px;
     height: 180px;
-    margin: 0 auto 40px auto; /* Jarak ke judul */
+    margin: 0 auto 40px auto; 
     position: relative;
     cursor: grab;
     z-index: 10;
@@ -74,7 +74,7 @@ body {
     border-radius: 50%;
     backface-visibility: hidden;
     display: flex; justify-content: center; align-items: center;
-    background: #ffffff; /* Background putih full biar logo menyatu jadi koin */
+    background: #ffffff; 
     border: 4px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -82,7 +82,7 @@ body {
 .coin-back { transform: rotateY(180deg); }
 
 .coin-face img {
-    width: 85%; /* Sedikit margin di dalam lingkaran */
+    width: 85%; 
     height: 85%;
     object-fit: contain;
     pointer-events: none;
@@ -92,7 +92,7 @@ body {
     width: 120px; height: 12px;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
-    margin-top: 210px; /* Posisi bayangan di bawah koin */
+    margin-top: 210px; 
     filter: blur(5px);
     animation: shadowPulse 3s infinite alternate ease-in-out;
 }
@@ -218,7 +218,7 @@ body {
 .coming-soon-text {
     font-size: 4.5rem;
     font-family: 'JAWAPALSU', sans-serif;
-    color: #ffcc70; /* Warna glowing emas */
+    color: #ffcc70; 
     margin: 0 0 15px 0;
     letter-spacing: 8px;
     text-shadow: 0 0 25px rgba(255, 204, 112, 0.5);
@@ -238,28 +238,23 @@ body {
     100% { text-shadow: 0 0 35px rgba(255, 204, 112, 0.7); transform: scale(1.03); }
 }
 
-/* =========================================================
-   FOOTER & RESPONSIVE
-   ========================================================= */
-footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255,0.6); padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
-
 /* =========================================
-   POPUP IKLAN (PROMO/INFOGRAFIS) 
-   Desain Rapi, Bouncy, & Smooth!
+   POPUP IKLAN (PROMO INFOGRAFIS GLASSMORPHISM)
    ========================================= */
 .promo-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px); /* Bikin blur belakang layar biar elegan */
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 99999;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .promo-overlay.show {
@@ -267,35 +262,52 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255
     visibility: visible;
 }
 
-.promo-content {
+.promo-container {
     position: relative;
-    max-width: 500px; /* Ukuran tidak terlalu melebar */
-    width: 90%;
-    transform: scale(0.5) translateY(100px); /* Efek awal mengecil dan di bawah */
-    opacity: 0;
-    /* Animasi membal/bounce saat muncul */
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 85%;
+    max-width: 380px; 
+    aspect-ratio: 1080 / 1350; 
+    animation: floatPromo 3s infinite ease-in-out alternate; 
 }
 
-.promo-overlay.show .promo-content {
-    transform: scale(1) translateY(0);
-    opacity: 1;
+@keyframes floatPromo {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-15px) scale(1.02); }
 }
 
-.promo-content img {
+.promo-card {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s ease;
+    border-radius: 15px; 
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    background: transparent;
+}
+
+/* Gambar 2 (Belakang) */
+.promo-img-2 {
+    transform: rotate(-6deg) translate(-10px, 10px) scale(0.95);
+    z-index: 1;
+}
+
+/* Gambar 1 (Depan) */
+.promo-img-1 {
+    transform: rotate(4deg) translate(10px, -10px) scale(1);
+    z-index: 2;
+}
+
+.promo-card img {
     width: 100%;
-    max-height: 85vh; /* Jangan sampai foto tembus batas HP */
-    object-fit: contain; 
-    border-radius: 20px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-    display: block;
-    background: #ffffff; /* Frame putih biar gambar transparan tetap rapi */
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px; 
+    border: none; 
+    background: transparent; 
 }
 
-/* Tombol Close Popup Promo */
+/* Tombol X Promo */
 .promo-close-btn {
     position: absolute;
     top: -15px;
@@ -304,24 +316,36 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255
     height: 45px;
     background: #c47b2c;
     color: white;
-    border: 3px solid #1e2a47; /* Border navy agar kontras */
+    border: 3px solid #1e2a47;
     border-radius: 50%;
-    font-size: 28px;
+    font-size: 26px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     transition: all 0.3s ease;
     z-index: 10;
-    line-height: 0;
-    padding-bottom: 4px; /* Trik agar "X" tepat di tengah bulatannya */
+    padding-bottom: 4px;
+    font-weight: bold;
 }
 
 .promo-close-btn:hover {
     background: #e5a953;
-    transform: scale(1.15) rotate(90deg); /* Mutar saat disentuh di PC */
+    transform: scale(1.15) rotate(90deg);
 }
+
+.swipe-out-right {
+    transform: translateX(120vw) rotate(45deg) !important;
+    opacity: 0;
+}
+.swipe-out-left {
+    transform: translateX(-120vw) rotate(-45deg) !important;
+    opacity: 0;
+}
+
+/* FOOTER & RESPONSIVE */
+footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255,0.6); padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
 
 @media(max-width: 768px) {
     .hologram-wrapper { width: 140px; height: 140px; }
@@ -370,24 +394,27 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255
     
     .team-deck.is-expanded .team-card-title { font-size: 1rem; margin-bottom: 2px; }
     .team-deck.is-expanded .team-card-desc { font-size: 0.8rem; }
-    
-    /* Penyesuaian tombol close promo di HP */
-    .promo-close-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 22px;
-        top: -12px;
-        right: -12px;
-    }
+
+    .promo-container { max-width: 80vw; }
+    .promo-close-btn { width: 38px; height: 38px; font-size: 22px; top: -12px; right: -12px; }
 }
 </style>
 </head>
 <body>
 
 <div class="promo-overlay" id="promoPopup">
-    <div class="promo-content">
-        <button class="promo-close-btn" onclick="closePromo()">&times;</button>
-        <img src="Foto%20Nyawiji%20Roso/Galeri/infografis.png" alt="Promo Nyawiji Roso">
+    <div class="promo-container">
+        
+        <div class="promo-card promo-img-2" id="promoCard2">
+            <button class="promo-close-btn" onclick="closePromoCard(2)">×</button>
+            <img src="Foto%20Nyawiji%20Roso/iklan/nyawiji%20roso%20infografis%202.png" alt="Promo Nyawiji Roso 2">
+        </div>
+
+        <div class="promo-card promo-img-1" id="promoCard1">
+            <button class="promo-close-btn" onclick="closePromoCard(1)">×</button>
+            <img src="Foto%20Nyawiji%20Roso/iklan/nyawiji%20roso%20infografis%201.png" alt="Promo Nyawiji Roso 1">
+        </div>
+
     </div>
 </div>
 
@@ -520,29 +547,34 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255,255,255
 
 <script>
 // =========================================
-// SCRIPT POPUP IKLAN MUNCUL OTOMATIS
+// SCRIPT POPUP IKLAN (SWIPE & DOUBLE STACK)
 // =========================================
 document.addEventListener("DOMContentLoaded", function() {
-    // Popup muncul 1 detik setelah halaman dimuat/direfresh
     setTimeout(function() {
         document.getElementById('promoPopup').classList.add('show');
     }, 1000);
 });
 
-function closePromo() {
-    document.getElementById('promoPopup').classList.remove('show');
+function closePromoCard(cardNumber) {
+    const card = document.getElementById('promoCard' + cardNumber);
+    
+    if (cardNumber === 1) {
+        card.classList.add('swipe-out-right');
+        const card2 = document.getElementById('promoCard2');
+        card2.style.transform = 'rotate(0deg) translate(0, 0) scale(1)';
+    } else if (cardNumber === 2) {
+        card.classList.add('swipe-out-left');
+        setTimeout(() => {
+            document.getElementById('promoPopup').classList.remove('show');
+        }, 500);
+    }
 }
 
-// Tutup Popup kalau diklik area gelap di luar gambar
-document.getElementById('promoPopup').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closePromo();
-    }
-});
-
+// =========================================
+// SCRIPT NAVBAR, SCROLL, DLL
+// =========================================
 function toggleMenu(){ document.getElementById("menuDropdown").classList.toggle("show"); }
 
-// INTERSECTION OBSERVER SCROLL ANIMATION
 document.addEventListener('DOMContentLoaded', function() {
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
@@ -555,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* =========================================================
-   LOGIKA INTERAKTIF HOLOGRAM 3D LINGKARAN
+   PERBAIKAN LOGIKA INTERAKTIF HOLOGRAM (EASING KEMBALI KE 0)
    ========================================================= */
 const hologramCoin = document.getElementById('hologramCoin');
 const hologramWrapper = document.getElementById('hologramWrapper');
@@ -565,11 +597,15 @@ let startX, startY;
 let rotX = 0, rotY = 0;
 let autoSpin;
 
-// Auto spin 360 perlahan jika tidak disentuh
 function startAutoSpin() {
     autoSpin = setInterval(() => {
         if (!isDragging) {
             rotY += 1; 
+            
+            // Efek Pegas (Easing) kembali ke posisi tegak (RotX = 0)
+            rotX += (0 - rotX) * 0.1;
+            if(Math.abs(rotX) < 0.1) rotX = 0;
+
             hologramCoin.style.transition = 'none';
             hologramCoin.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
         }
@@ -577,7 +613,6 @@ function startAutoSpin() {
 }
 startAutoSpin();
 
-// Event Mouse / Desktop
 hologramWrapper.addEventListener('mousedown', (e) => {
     isDragging = true;
     startX = e.pageX; startY = e.pageY;
@@ -591,15 +626,12 @@ window.addEventListener('mousemove', (e) => {
     const x = e.pageX; const y = e.pageY;
     const deltaX = (x - startX) * 0.5;
     const deltaY = (y - startY) * 0.5;
-    
     rotY += deltaX;
     rotX -= deltaY; 
-    
     hologramCoin.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
     startX = x; startY = y;
 });
 
-// Event Sentuh / Touch (HP/Mobile)
 hologramWrapper.addEventListener('touchstart', (e) => {
     isDragging = true;
     startX = e.touches[0].pageX; startY = e.touches[0].pageY;
@@ -613,10 +645,8 @@ window.addEventListener('touchmove', (e) => {
     const x = e.touches[0].pageX; const y = e.touches[0].pageY;
     const deltaX = (x - startX) * 0.5;
     const deltaY = (y - startY) * 0.5;
-    
     rotY += deltaX;
     rotX -= deltaY;
-    
     hologramCoin.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
     startX = x; startY = y;
 });
@@ -682,9 +712,6 @@ closeBtn.addEventListener('click', closeModal);
 modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
-/* =========================================================
-   ANIMASI FLIP (SUPER SMOOTH)
-   ========================================================= */
 const deck = document.getElementById('teamDeck');
 const cards = document.querySelectorAll('.team-card');
 
@@ -709,13 +736,11 @@ deck.addEventListener('click', (e) => {
         const deltaX = firstRects[i].left - lastRects[i].left;
         const deltaY = firstRects[i].top - lastRects[i].top;
 
-        // Invert instan
         card.style.transition = 'none';
         card.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
 
         requestAnimationFrame(() => {
             const forcedReflow = card.offsetHeight; 
-            // Play dengan cubic-bezier yang sangat mulus
             card.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease, opacity 0.6s ease';
             card.style.transform = 'none'; 
         });
